@@ -3,11 +3,10 @@
 library(shiny)   
 library(dplyr)  
 library(lubridate)
-library(shinydashboard)
+#library(shinydashboard)
 library(stringr)
-library(highcharter)
+library(plotly)
 library(rvest)
-library(stringr)
 
 
 #read from the html data
