@@ -1,24 +1,17 @@
-server <- function(input, output) {
+server <- function(input, output, session){
   
-  output$letter_plot <- renderPlotly({  
+  output$text <- renderText({
     
-    plot <- ggplot(wordle_tally, aes(x=letter,y=count)) +
-      geom_histogram(stat="identity",fill="dodgerblue3")
-    
-    
-    plot
-  })
-  
-  output$download_wordle <- downloadHandler(
-    filename = function() {
-      paste("data-", Sys.Date(), ".csv", sep="")
-    },
-    content = function(file) {
-      write.csv(wordle, file)
+    if (input$select == "Yes"){
+      
+      text <- "I am happy it worked!"
+    } else {
+      
+      text <- "Sorry it looks like something went wrong."
     }
-  )
-  
-  
+    
+    text
+  })
   
   
 }
