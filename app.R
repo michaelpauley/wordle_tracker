@@ -40,7 +40,7 @@ ui <- dashboardPage(
       ))), hr(),
     fluidRow(
     column(width = 12,
-    highchartOutput("letter_plot", width = "100%", height = "400px"))
+    plotlyOutput("letter_plot"))
     ),br(),
     fluidRow(
       column(width = 12,
@@ -54,13 +54,14 @@ ui <- dashboardPage(
 
 server <- function(input, output) {
   
-  output$letter_plot <-  highcharter::renderHighchart({
-    plot <- hchart(wordle_tally, "column", hcaes(x = letter, y = count))
+  output$letter_plot <- renderPlotly({  
+    
+   plot <- ggplot(wordle_tally, aes(x=letter,y=count)) +
+      geom_histogram(stat="identity",fill="dodgerblue3")
     
     
-    plot %>% highcharter::hc_add_theme(highcharter::hc_theme_elementary()) %>%
-      highcharter::hc_tooltip(pointFormat = "{point.y:.0f}")
-  })
+    plot
+})
   
   output$download_wordle <- downloadHandler(
     filename = function() {
