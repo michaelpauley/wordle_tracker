@@ -28,24 +28,24 @@ for (i in 1:nrow(wordle)){
 double_letters <- sum(wordle$unique_chars == 4)
 triple_letters <- sum(wordle$unique_chars == 3)
   
-  #count the number of letters  
-  # wordle_tally <- data.frame(letter = letters,
-  #                            count = NA)
-  # 
-  # for (i in 1:nrow(wordle_tally)){
-  #   wordle_tally$count[i] <- sum(str_count(wordle$Answer,wordle_tally$letter[i]))
-  # }
+ # count the number of letters
+  wordle_tally <- data.frame(letter = letters,
+                             count = NA)
+
+  for (i in 1:nrow(wordle_tally)){
+    wordle_tally$count[i] <- sum(str_count(as.character(wordle$Answer),wordle_tally$letter[i]))
+  }
 
 
 
 
 #check most common letters
-# com_let <- wordle_tally %>% 
-#   arrange(count) %>% slice(1,2,3,24,25,26) %>% 
-#   mutate(letter = toupper(letter))
-# 
-# most_com_lets <- paste0(com_let$letter[4],", ",com_let$letter[5],", ",com_let$letter[6])
-# least_com_lets <- paste0(com_let$letter[1],", ",com_let$letter[2],", ",com_let$letter[3])
+com_let <- wordle_tally %>%
+  arrange(count) %>% slice(1,2,3,24,25,26) %>%
+  mutate(letter = toupper(letter))
+
+most_com_lets <- paste0(com_let$letter[4],", ",com_let$letter[5],", ",com_let$letter[6])
+least_com_lets <- paste0(com_let$letter[1],", ",com_let$letter[2],", ",com_let$letter[3])
 
 ui <- dashboardPage(
   dashboardHeader(title = "Wordle Tracker"),
@@ -61,16 +61,16 @@ ui <- dashboardPage(
         title = "Total Wordle Games:", value = nrow(wordle), icon = icon("hashtag"),
         color = "yellow"
       ),
-      # infoBox(
-      #   title = "Most Common Letters:", value = most_com_lets, icon = icon("arrow-up"),
-      #   color = "green"
-      # ),
-      # infoBox(
-      #   title = "Least Common Letters:",
-      #   value = least_com_lets,
-      #   icon = icon("arrow-down"),
-      #   color = "yellow"
-      # ),
+      infoBox(
+        title = "Most Common Letters:", value = most_com_lets, icon = icon("arrow-up"),
+        color = "green"
+      ),
+      infoBox(
+        title = "Least Common Letters:",
+        value = least_com_lets,
+        icon = icon("arrow-down"),
+        color = "yellow"
+      ),
       infoBox(
         title = "Double Letter Words:",
         value = double_letters,
