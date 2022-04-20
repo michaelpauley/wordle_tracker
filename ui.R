@@ -1,9 +1,9 @@
 ## app.R ##
  #
 library(shiny) #
-library(shinydashboard)
+library(shinydashboard) #
 library(tidyverse)  
-library(lubridate) 
+library(lubridate) #
 library(rvest)
 
 #read from the html data
@@ -23,6 +23,7 @@ double_list <- str_split(wordle$Answer,"")
 wordle$unique_chars <- NA
 for (i in 1:nrow(wordle)){
   wordle$unique_chars[i] <- length(unique(double_list[[i]]))
+  }
   
   #count the number of letters  
   wordle_tally <- data.frame(letter = letters,
@@ -31,7 +32,7 @@ for (i in 1:nrow(wordle)){
   for (i in 1:nrow(wordle_tally)){
     wordle_tally$count[i] <- sum(str_count(wordle$Answer,wordle_tally$letter[i]))
   }
-}
+
 
 double_letters <- sum(wordle$unique_chars == 4)
 triple_letters <- sum(wordle$unique_chars == 3)
