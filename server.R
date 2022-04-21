@@ -2,8 +2,8 @@ server <- function(input, output) {
   
   output$letter_plot <- renderPlot({  
     
-    plot <- (ggplot(wordle_tally, aes(x=letter,y=count)) +
-      geom_histogram(stat="identity",fill="dodgerblue3"))
+    plot <- ggplot(wordle_tally, aes(x=letter,y=count)) +
+      geom_histogram(stat="identity",fill="dodgerblue3")
     
     
     plot
