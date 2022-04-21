@@ -33,7 +33,7 @@ triple_letters <- sum(wordle$unique_chars == 3)
                              count = NA)
 
   for (i in 1:nrow(wordle_tally)){
-    wordle_tally$count[i] <- sum(str_count(as.character(wordle$Answer),as.character(wordle_tally$letter[i])))
+    wordle_tally$count[i] <- sum(str_count(as.character(wordle$Answer),wordle_tally$letter[i]))
   }
 
 
@@ -87,11 +87,7 @@ ui <- dashboardPage(
     column(width = 12,
     plotOutput("letter_plot"))
     ),br(),
-    fluidRow(
-      column(width = 12,
-             div(
-             downloadButton("download_wordle", label = "Download Wordle Answers", style="float:right")))
-    ),
+
     "Developed by Mike Pauley - michaelrpauley@gmail.com"
   )
   
