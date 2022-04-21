@@ -2,12 +2,9 @@ server <- function(input, output) {
   
   output$letter_plot <- renderPlot({  
     
-    plot <- ggplot(wordle_tally, aes(x=letter,y=count)) +
-      geom_histogram(stat="identity",fill="dodgerblue3")
+   barplot(count ~ letter,data = wordle_tally, col=rgb(0.2,0.4,0.6,0.6))
     
-    
-    plot
-  })
+    })
   
   output$download_wordle <- downloadHandler(
     filename = function() {
